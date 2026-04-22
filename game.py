@@ -13,6 +13,7 @@ from Player import player
 
 
 def welcome_Player(): 
+
     print("------------------------------")
     print("Welcome to the Adventure Game!")  
     print("Your journey begins here...")
@@ -36,10 +37,34 @@ def describe_area():
     """
     print(starting_area)
 
+# Adding more functions
+def expolore_the_dark_woods(player):
+    print(f"Brave choice, {player.name}! take the left path into the dark woods. ")
+    player.add_to_inventory("lantern")
+
+def exolore_the_mountain_pass(player):
+    print(f"Brave choice, {player.name}! take the right path toward the mountain pass." )
+    player.add_to_inventory("map")
+
+def explore_the_cave(player):
+    if player.is_item_in_inventory("lantern"):
+        print(f"Brave choice, {player.name}, you've entered the cave. ")
+        player.add_to_inventory("treasure")
+    else:
+        print(f"It is too dark to go into the cave")
+
+def explore_the_hidden_valley(player):
+     # Go in the valley if they have a map and the treaure
+    if player.is_item_in_inventory("map") and player.is_item_in_inventory("treasure"):
+        print(f"Brave choice, {player.name}! you enterred a hidden valley. ")
+        player.add_to_inventory("rare herbs")
+    else:
+        print(f"{player.name}, you don't have the required items to enter the hidden valley.")
+
+        
 def add_to_inventory(item):
     player.inventory.append(item)
     print(f"Item was picked up {item}, it has been added to your inventory")
-
 player_name = welcome_Player()
 
 player = player()
@@ -55,24 +80,13 @@ while True:
     decision = input("What will you do (1,2,3,4,5,i, q (quit)): ").lower()
     # Respond based on the player's decision
     if decision == "1": 
-        print(f"Brave choice, {player.name}! take the left path into the dark woods. ")
-        player.add_to_inventory("lantern")
+        expolore_the_dark_woods(player)
     elif decision == "2":
-        print(f"Brave choice, {player.name}! take the right path toward the mountain pass." )
-        player.add_to_inventory("map")
+        exolore_the_mountain_pass(player)
     elif decision == "3":
-        if player.is_item_in_inventory("lantern"):
-            print(f"Brave choice, {player.name}, you've entered the cave. ")
-            player.add_to_inventory("treasure")
-        else:
-            print(f"It is too dark to go into the cave")
+        explore_the_cave(player)
     elif decision == "4": # Hidden valley
-        # Go in the valley if they have a map and the treaure
-        if player.is_item_in_inventory("map") and player.is_item_in_inventory("treasure"):
-            print(f"Brave choice, {player.name}! you enterred a hidden valley. ")
-            player.add_to_inventory("rare herbs")
-        else:
-            print(f"{player.name}, you don't have the required items to enter the hidden valley.")
+       explore_the_hidden_valley(player)
     elif decision == "5": 
         print(f"Brave choice, {player.name}! you stay where you are. ")
     elif decision == "i":
