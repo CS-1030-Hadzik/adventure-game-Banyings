@@ -29,7 +29,8 @@ def describe_area():
     1. Take the left path into the dark woods.
     2. Take the right path toward the mountain pass.
     3. Take the center path towards the cave
-    4. Stay where you are.
+    4. Take the path to the hidden valley
+    5. Stay where you are.
     Type 'i' to view your inventory.
     Type 'q' to quit
     """
@@ -51,9 +52,9 @@ print(f"Welcome, {player.name}! Your journey begins now.")
 describe_area()
 
 while True:
-    decision = input("What will you do (1,2,3,4,i, q (quit)): ").lower()
+    decision = input("What will you do (1,2,3,4,5,i, q (quit)): ").lower()
     # Respond based on the player's decision
-    if decision == "1":
+    if decision == "1": 
         print(f"Brave choice, {player.name}! Take the left path into the dark woods. ")
         player.add_to_inventory("lantern")
     elif decision == "2":
@@ -62,10 +63,17 @@ while True:
     elif decision == "3":
         if player.is_item_in_inventory("lantern"):
             print(f"Brave choice, {player.name}, you've entered the cave. ")
+            player.add_to_inventory("treasure")
         else:
-            print("It is too dark to go into tje cave")
-    elif decision == "4": 
-        print(f"Brave choice, {player.name}! Stay where you are. ")
+            print(f"It is too dark to go into the cave")
+    elif decision == "4": # Hidden valley
+        # Go in the valley if they have a map and the treaure
+        if player.is_item_in_inventory("map") and player.is_item_in_inventory("treasure"):
+            print(f"Brave choice, {player.name}! You enterred a hidden valley. ")
+        else:
+            print(f"{player.name}, you don't have the required items to enter the hidden valley.")
+    elif decision == "5": 
+        print(f"Brave choice, {player.name}! You stay where you are. ")
     elif decision == "i":
         print(player.inventory)
     elif decision == "q":
