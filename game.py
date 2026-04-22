@@ -55,10 +55,10 @@ while True:
     decision = input("What will you do (1,2,3,4,5,i, q (quit)): ").lower()
     # Respond based on the player's decision
     if decision == "1": 
-        print(f"Brave choice, {player.name}! Take the left path into the dark woods. ")
+        print(f"Brave choice, {player.name}! take the left path into the dark woods. ")
         player.add_to_inventory("lantern")
     elif decision == "2":
-        print(f"Brave choice, {player.name}!  Take the right path toward the mountain pass." )
+        print(f"Brave choice, {player.name}! take the right path toward the mountain pass." )
         player.add_to_inventory("map")
     elif decision == "3":
         if player.is_item_in_inventory("lantern"):
@@ -69,11 +69,12 @@ while True:
     elif decision == "4": # Hidden valley
         # Go in the valley if they have a map and the treaure
         if player.is_item_in_inventory("map") and player.is_item_in_inventory("treasure"):
-            print(f"Brave choice, {player.name}! You enterred a hidden valley. ")
+            print(f"Brave choice, {player.name}! you enterred a hidden valley. ")
+            player.add_to_inventory("rare herbs")
         else:
             print(f"{player.name}, you don't have the required items to enter the hidden valley.")
     elif decision == "5": 
-        print(f"Brave choice, {player.name}! You stay where you are. ")
+        print(f"Brave choice, {player.name}! you stay where you are. ")
     elif decision == "i":
         print(player.inventory)
     elif decision == "q":
